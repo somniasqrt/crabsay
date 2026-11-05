@@ -107,17 +107,32 @@ fortune | crabsay
 
 ## Known features
 
-On macOS (zsh), comments are not comments by default in an interactive shell, so the crab
-will faithfully read them out loud:
+### The crab reads your comments
+
+Try this on macOS:
+
+```sh
+crabsay hello from mac # just a test
+```
 
 ```
- ____________________________
-< hello from mac # перевірка >
- ----------------------------
+ ______________________________
+< hello from mac # just a test >
+ ------------------------------
 ```
 
-This is not a bug. The crab hears everything. Run `setopt interactivecomments` if you want
-the crab to hear less.
+**What happened:** in an interactive session, zsh (the default shell on macOS) does not treat
+`#` as the start of a comment. So `#`, `just`, `a` and `test` are passed to `crabsay` as
+ordinary arguments, and the crab says all of them. Bash does strip the comment before running
+the command, which is why the same line works fine on Linux.
+
+**This is not a bug.** The crab hears everything.
+
+If you want the crab to hear less, enable comments in zsh:
+
+```sh
+echo 'setopt interactivecomments' >> ~/.zshrc
+```
 
 ## FAQ
 
