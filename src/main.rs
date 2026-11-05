@@ -139,6 +139,13 @@ fn main() -> ExitCode {
     let res = bubble(&mut out, &lines, o.think)
         .and_then(|_| crab(&mut out, o.think, &o.eyes))
         .and_then(|_| out.flush());
-    res.unwrap();
-    ExitCode::SUCCESS
+    match res {
+        Ok(()) => ExitCode::SUCCESS,
+        // e.g. `crabsay ... | head` — broken pipe isn't an error worth shouting about
+        Err(e) if e.kind() == io::ErrorKind::BrokenPipe => ExitCode::SUCCESS,
+        Err(e) => {
+            eprintln!("crabsay: {e}");
+            ExitCode::FAILURE
+        }
+    }
 }
