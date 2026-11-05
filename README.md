@@ -160,6 +160,15 @@ Because it contains the entire crab, statically linked.
 
 PRs are welcome, especially new crabs. Read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
+## See also
+
+- [crabfortune](https://github.com/somniasqrt/crabfortune): `fortune`, rewritten in Rust. The crab
+  finally has something wise to say:
+
+  ```sh
+  crabfortune | crabsay
+  ```
+
 ## License
 
 [MIT](LICENSE) © somniasequitur
